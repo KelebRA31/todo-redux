@@ -1,36 +1,27 @@
 import React, { useContext } from 'react';
-import { TodoContext } from '../context/TodoContext/TodoContextProvider';
+import { TodosContext } from '../../context/TodosContextProvider';
+import AddTodo from '../AddTodo/AddTodo';
+import Spinner from '../Spinner/Spinner';
+import Todo from '../Todo/Todo';
 
-function TodoList() {
-  const { inputValue, setInputValue } = useContext(TodoContext);
+export default function Todolist() {
+  const { todolist } = useContext(TodosContext);
 
   return (
-    // eslint-disable-next-line react/jsx-filename-extension
     <div>
-      <ul className="list-group">
-        {inputValue?.map((elem, index) => (
-          <li className="list-group-item" key={elem.id}>
-            <input
-              className="form-check-input me-1"
-              type="checkbox"
-              id="Checkbox"
-              value={elem.state}
-              onClick={() => setInputValue((prev) => prev.map((el, i) => {
-                if (index === i) {
-                  return { ...el, state: !el.state };
-                }
-                return el;
-              }))}
-              // checked={handleClick}
-            />
-            <label className="form-check-label" htmlFor="firstCheckbox" style={elem.state ? { textDecoration: 'line-through' } : { textDecoration: 'none' }}>{elem.name}</label>
-            <button type="button" className="btn btn-light" onClick={() => setInputValue(inputValue.filter((el, i) => i !== index))}>Изменить</button>
-            <button type="button" className="btn btn-danger" onClick={() => setInputValue(inputValue.filter((el, i) => i !== index))}>Удалить</button>
-          </li>
-        ))}
-      </ul>
+      <AddTodo />
+      {!todolist.length ? (
+        <Spinner />
+
+      ) : (
+        <div className="row">
+          <ul className="list-group">
+
+            {todolist?.map((todo) => (<li key={todo.id} className="list-group-item li_item"><Todo todo={todo} /></li>))}
+          </ul>
+        </div>
+      )}
+
     </div>
   );
 }
-
-export default TodoList;

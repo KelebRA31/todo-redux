@@ -1,0 +1,22 @@
+.form-class {
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  margin: 30px auto;
+  gap: 30px;
+}
+.li-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.gg {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+}
+.checked {
+  text-decoration: line-through;
+  background: rgb(167, 167, 167);
+}
